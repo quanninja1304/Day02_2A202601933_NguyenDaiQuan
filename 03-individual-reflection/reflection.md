@@ -12,24 +12,20 @@
 |---|---|---|
 | Scan cá nhân | Bắt đầu từ trải nghiệm chi tiêu nhiều khoản nhỏ qua mobile banking và ví điện tử, sau đó phân tích theo bốn lăng kính: lặp lại, tốn thời gian, AI có thể hỗ trợ và tác động từ người khác. | Xác định được pain chính không phải là “thiếu một app AI”, mà là người dùng thiếu bối cảnh ngân sách tại thời điểm ra quyết định. |
 | Pitch Problem Card | Chuẩn bị pitch cho Problem Card “Cảnh báo chi tiêu theo ngữ cảnh”, tập trung vào actor, workflow hiện tại, bottleneck và metric cần đo. | Ý tưởng có thể được trình bày theo hướng problem-first thay vì bắt đầu bằng chatbot hoặc Agent. |
-| Challenge bài cá nhân | Tự đặt câu hỏi liệu cảnh báo sau giao dịch còn đủ giá trị, Rule có giải quyết phần lớn nhu cầu không và làm sao xác định một khoản chi là bốc đồng mà không phán xét người dùng. | Scope MVP được thu hẹp; không giả định ứng dụng có thể can thiệp trực tiếp vào giao dịch ngân hàng. |
+| Pitch + challenge | Với bài cá nhân, tôi đặt câu hỏi liệu cảnh báo sau giao dịch còn đủ giá trị và Rule có giải quyết phần lớn nhu cầu không. Với bài nhóm, tôi challenge phương án AI đọc PDF rồi xuất Excel ngay: nếu gặp lại cùng sản phẩm, hệ thống sẽ phải đọc lại PDF và không tạo được dữ liệu dùng chung. | Scope bài cá nhân được thu hẹp; candidate nhóm được tách thành bước số hóa datasheet vào database và bước tạo BOM từ dữ liệu đã duyệt. |
 | Gom trùng / cluster | Ý tưởng cá nhân được tách thành ba nhóm pain: thiếu cảnh báo ngân sách, khó phân loại giao dịch và tác động của khuyến mãi. | Nhìn ra ba vấn đề có liên quan nhưng không nên gộp thành một hệ thống quá lớn ngay từ đầu. |
 | Chọn candidate problem | Ưu tiên card cảnh báo chi tiêu theo ngữ cảnh vì pain xảy ra thường xuyên, workflow rõ và có thể đo bằng dữ liệu cá nhân. | Có một candidate đủ cụ thể để validation bằng log 14 ngày và pilot nhỏ. |
 | Validation / research | Đề xuất ghi log cá nhân 14 ngày, phỏng vấn 3–5 người và thử rule-only trước khi thêm AI. Hiện chưa có kết quả phỏng vấn hoặc số liệu baseline thực tế. | Tránh biến các con số mục tiêu thành “bằng chứng”; phân biệt rõ dữ kiện đã quan sát với giả thuyết cần kiểm chứng. |
-| Workflow | Mô tả current workflow từ lúc nhận nhu cầu/khuyến mãi đến lúc cuối tháng xem lại lịch sử; xây future workflow theo chuỗi rule → AI fallback → budget engine → cảnh báo → feedback. | Xác định được human boundary, fallback và điểm mà AI thực sự có ích. |
-| Problem Statement | Bổ sung actor, bối cảnh, bottleneck, impact, metric và boundary cho vấn đề chi tiêu bốc đồng. | Problem Statement đo được hơn và không còn dừng ở mô tả chung “giúp quản lý chi tiêu tốt hơn”. |
+| Workflow | Với bài cá nhân, tôi mô tả current/future workflow quản lý chi tiêu. Với bài nhóm, tôi tham gia làm rõ hai phase: AI trích xuất PDF → người duyệt → lưu database; sau đó Rule/template lấy dữ liệu đã duyệt để tạo BOM. | Xác định được human boundary, fallback và điểm mà AI thực sự có ích; tránh dùng AI cho bước tạo Excel vốn có thể xử lý ổn định bằng template. |
+| Problem Statement | Bổ sung actor, bối cảnh, bottleneck, impact, metric và boundary cho vấn đề cá nhân; đồng thời góp ý boundary của bài nhóm: AI không được tự đoán Part Number và dữ liệu chỉ được lưu sau khi kỹ sư duyệt. | Problem Statement cụ thể hơn, đồng thời giảm rủi ro một mã sản phẩm sai bị đưa vào database rồi tái sử dụng trong nhiều báo giá. |
 | Rule / Workflow / Agent | So sánh rule cảnh báo theo ngưỡng, workflow có AI hỗ trợ và Agent. | Chọn Workflow; Rule xử lý trường hợp chắc chắn, AI chỉ xử lý dữ liệu mơ hồ. Chưa có lý do đủ mạnh để dùng Agent. |
 | Decision | Đề xuất pilot bằng CSV/dữ liệu sandbox và cảnh báo sau giao dịch hoặc chức năng kiểm tra thủ công trước khi mua. | **Go với pilot nhỏ cho phân loại và theo dõi ngân sách; Not Yet với cảnh báo trực tiếp trước giao dịch thật** cho đến khi có tích hợp chính thức và kiểm chứng nhu cầu. |
 
-### Phần đóng góp nhóm cần tự xác nhận trước khi nộp
+### Đóng góp của tôi trong artifact nhóm
 
-Bản ghi hiện tại chưa cho biết chính xác Nguyễn Đại Quân đã pitch/challenge hoặc phụ trách hạng mục nào trong candidate chung “Hệ thống số hóa Datasheet & Tự động tạo BOM”. Trước khi nộp, tôi cần bổ sung 2–3 câu về việc mình đã thực sự làm trong buổi nhóm, ví dụ:
+Khi nhóm cân nhắc phương án để AI đọc trực tiếp PDF rồi xuất file Excel, tôi đặt câu hỏi: nếu lần sau cần báo giá lại đúng sản phẩm đó thì tại sao hệ thống phải đọc lại PDF từ đầu? Từ challenge này, tôi đề xuất tách workflow thành hai phase: số hóa datasheet vào database để tạo tài sản dữ liệu dùng lại, sau đó dùng Rule/template lấy dữ liệu đã được duyệt để tạo BOM.
 
-- Câu hỏi tôi đã dùng để challenge candidate của bạn khác.
-- Phần workflow, research, Problem Statement hoặc slide mà tôi trực tiếp phụ trách.
-- Ý kiến của tôi đã làm nhóm thay đổi quyết định hoặc boundary như thế nào.
-
-Tôi không ghi một đóng góp chưa xảy ra chỉ để làm reflection trông đầy đủ.
+Tôi cũng tham gia làm rõ boundary cho phần trích xuất: Part Number và thông số kỹ thuật là dữ liệu cứng nên AI không được tự đoán; trường có độ tin cậy thấp phải để trống và đánh dấu. Kỹ sư phải đối chiếu với PDF rồi bấm duyệt trước khi dữ liệu được lưu, nhờ đó lỗi trích xuất không bị lan sang các báo giá về sau.
 
 ---
 
@@ -75,7 +71,7 @@ Cảnh báo tự động trước giao dịch thật được xếp vào **Not Y
 
 ### Tôi đóng góp gì thật sự vào artifact?
 
-Đóng góp chắc chắn của tôi là candidate problem về chi tiêu bốc đồng, phần phân tích theo bốn lăng kính, ba Problem Cards liên quan, current/future workflow, boundary và đề xuất pilot rule-first. Đối với artifact nhóm về Datasheet/BOM, tôi cần ghi lại đúng phần mình thực sự tham gia sau buổi thảo luận thay vì suy đoán hoặc để AI viết thay.
+Với phần cá nhân, tôi đóng góp candidate về chi tiêu bốc đồng, phân tích theo bốn lăng kính, ba Problem Cards, current/future workflow, boundary và đề xuất pilot rule-first. Với artifact nhóm, đóng góp chính của tôi là challenge phương án đọc lại PDF cho mỗi báo giá, đề xuất database làm lớp dữ liệu dùng chung và làm rõ human boundary trước khi lưu Part Number/thông số.
 
 ### Điều khó nhất khi viết Problem Statement là gì?
 
@@ -132,5 +128,5 @@ không cần Agent ở giai đoạn này.
 - [x] Có nêu AI hữu ích, hời hợt và phần con người sửa lại.
 - [ ] Bổ sung baseline từ log chi tiêu thật.
 - [ ] Bổ sung kết quả phỏng vấn hoặc survey.
-- [ ] Bổ sung đóng góp thực tế của Nguyễn Đại Quân trong artifact nhóm.
+- [x] Đã nêu đóng góp của Nguyễn Đại Quân trong artifact nhóm.
 - [ ] Tự đọc lại và sửa giọng văn để reflection phản ánh đúng trải nghiệm cá nhân.
